@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>生成二维码</title>
+	<script type="text/javascript" src="qrcode.js"></script>
+</head>
+<body onload="update_qrcode()">
+	<div id="qr">
+		
+	</div>
+</body>
+<script type="text/javascript">
+	var draw_qrcode = function (text, typeNumber, errorCorrectLevel) {
+		document.write(create_qrcode,typeNumber, errorCorrectLevel);
+	}
+	var create_qrcode = function (text, typeNumber, errorCorrectLevel, table) {
+		var qr = qrcode(typeNumber || 4, errorCorrectLevel || 'M');
+		qr.addData(text);
+		qr.make();
+		return qr.createImgTag();
+	}
+	var update_qrcode = function ( url ) {
+		var urlR = url.replace(/^[\s\u3000]+|[\s\u3000]+$/g, '');
+		document.getElementById('qr').innerHTML = create_qrcode(urlR);
+	}
+	var url = 'http://www.oneapm.com/';
+	update_qrcode(url);
+</script>
+</html>
